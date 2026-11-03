@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--/*
+    This file is the Java answer to base.html.
+
+    Jinja used inheritance: a child said {% extends "base.html" %} and filled in
+    {% block content %}. Thymeleaf works the other way round - it uses
+    INCLUSION. Every page is a complete HTML document that pulls these shared
+    pieces in with th:replace.
+
+    Slightly more typing per page, but each template opens standalone in the
+    browser and in IntelliJ's preview, and there is no extra dependency to add.
+
+    This file is never rendered on its own.
+*/-->
+
+<head th:fragment="head(pageTitle)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Spendly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- @{/css/style.css} is url_for('static', filename='css/style.css').
+         Spring serves everything under src/main/resources/static at the root. -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<nav class="navbar" th:fragment="navbar">
+    <div class="nav-inner">
+        <a th:href="@{/}" class="nav-brand">
+            <span class="brand-icon">◈</span>
+            <span class="brand-name">Spendly</span>
+        </a>
+        <div class="nav-links" sec:authorize="isAuthenticated()">
+            <a th:href="@{/expenses}">Dashboard</a>
+            <form th:action="@{/logout}" method="post" class="logout-form">
+                <button type="submit" class="nav-link-btn">Sign out</button>
+            </form>
+        </div>
+        <div class="nav-links" sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}">Sign in</a>
+            <a th:href="@{/register}" class="nav-cta">Get started</a>
+        </div>
+    </div>
+</nav>
+
+<footer class="footer" th:fragment="footer">
+    <div class="footer-inner">
+        <span class="brand-icon">◈</span>
+        <span class="footer-name">Spendly</span>
+        <p class="footer-copy">Track every rupee. Own your finances.</p>
+        <a th:href="@{/terms}">Terms and Conditions</a>
+        <a th:href="@{/privacy}">Privacy Policy</a>
+    </div>
+</footer>
+
+<script th:fragment="scripts" th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

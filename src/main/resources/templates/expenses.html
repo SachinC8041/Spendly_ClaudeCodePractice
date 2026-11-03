@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head('Dashboard — Spendly')}">
+    <title>Dashboard</title>
+</head>
+
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="main-content">
+
+    <section class="dashboard-section">
+        <div class="dashboard-inner">
+
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="dashboard-title">Your expenses</h1>
+                    <p class="dashboard-subtitle">Everything you've logged, newest first.</p>
+                </div>
+                <div class="dashboard-total">
+                    <span class="dashboard-total-label">Total spent</span>
+                    <span class="dashboard-total-amount"
+                          th:text="'₹' + ${#numbers.formatDecimal(total, 1, 2)}">₹0.00</span>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+
+                <div class="auth-card add-expense-card">
+                    <h2 class="card-heading">Add an expense</h2>
+                    <form th:action="@{/expenses}" method="post">
+                        <div class="form-group">
+                            <label for="amount">Amount (₹)</label>
+                            <input type="number" step="0.01" min="0" id="amount" name="amount"
+                                   class="form-input" placeholder="450.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <input type="text" id="category" name="category"
+                                   class="form-input" placeholder="Food" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description (optional)</label>
+                            <input type="text" id="description" name="description"
+                                   class="form-input" placeholder="Lunch with team">
+                        </div>
+                        <button type="submit" class="btn-submit">Add expense</button>
+                    </form>
+                </div>
+
+                <div class="expense-list-card">
+                    <table class="expense-table" th:if="${!expenses.isEmpty()}">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="expense : ${expenses}">
+                            <td th:text="${expense.date}"></td>
+                            <td th:text="${expense.category}"></td>
+                            <td th:text="${expense.description}"></td>
+                            <td th:text="'₹' + ${#numbers.formatDecimal(expense.amount, 1, 2)}"></td>
+                            <td>
+                                <form th:action="@{/expenses/{id}/delete(id=${expense.id})}" method="post">
+                                    <button type="submit" class="expense-delete-btn">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <p class="empty-state" th:if="${expenses.isEmpty()}">
+                        No expenses yet — add your first one to get started.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+
+</body>
+</html>

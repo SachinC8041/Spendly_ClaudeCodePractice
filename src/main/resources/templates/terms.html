@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head('Terms and Conditions — Spendly')}">
+    <title>Terms and Conditions</title>
+</head>
+
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="main-content">
+
+    <section class="legal-section">
+        <div class="legal-container">
+            <h1 class="legal-title">Terms and Conditions</h1>
+            <p class="legal-updated">Last updated: August 21, 2026</p>
+
+            <h2>1. Acceptance of Terms</h2>
+            <p>
+                By creating an account or otherwise using Spendly ("the Service"), you agree to be
+                bound by these Terms and Conditions. If you do not agree to these terms, please do
+                not use the Service.
+            </p>
+
+            <h2>2. Use of Service</h2>
+            <p>
+                Spendly is a personal expense tracking tool intended to help you log and review your
+                own spending. You agree to use the Service only for lawful purposes and not to misuse
+                it in any way, including attempting to gain unauthorized access to other users'
+                accounts or data, or interfering with the normal operation of the Service.
+            </p>
+
+            <h2>3. User Data</h2>
+            <p>
+                The expense records, categories, and account details you enter are yours. We store
+                this data to provide the Service to you and do not sell your personal data to third
+                parties. You are responsible for keeping your account credentials secure and for the
+                accuracy of the information you enter.
+            </p>
+
+            <h2>4. Limitations of Liability</h2>
+            <p>
+                Spendly is provided "as is" without warranties of any kind. We do not guarantee that
+                the Service will be uninterrupted, error-free, or that any financial summaries or
+                totals it displays are free from mistakes. To the fullest extent permitted by law,
+                Spendly and its creators shall not be liable for any indirect, incidental, or
+                consequential damages arising from your use of the Service, including any financial
+                decisions made based on the information it presents.
+            </p>
+
+            <h2>5. Changes to Terms</h2>
+            <p>
+                We may update these Terms and Conditions from time to time. Continued use of the
+                Service after changes are posted constitutes your acceptance of the revised terms.
+                We encourage you to review this page periodically.
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head('Sign in — Spendly')}">
+    <title>Sign in</title>
+</head>
+
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="main-content">
+
+    <section class="auth-section">
+        <div class="auth-container">
+
+            <div class="auth-header">
+                <h1 class="auth-title">Welcome back</h1>
+                <p class="auth-subtitle">Sign in to your Spendly account</p>
+            </div>
+
+            <div class="auth-card">
+                <!--/* {% if error %} becomes th:if. The element and everything
+                       inside it is dropped when the expression is false or the
+                       model attribute is absent. Set it from the controller with
+                       model.addAttribute("error", "Invalid email or password"). */-->
+                <div class="auth-error" th:if="${error}" th:text="${error}"></div>
+
+                <!--/* th:action="@{/login}" writes the context path for you.
+                       Nothing answers POST /login yet - you will add
+                       @PostMapping("/login") in Step 2. Until then submitting
+                       gives 405 Method Not Allowed, exactly as the Flask
+                       version did. */-->
+                <form th:action="@{/login}" method="post">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email"
+                               class="form-input" placeholder="nitish@example.com"
+                               required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password"
+                               class="form-input" placeholder="Your password"
+                               required>
+                    </div>
+                    <button type="submit" class="btn-submit">Sign in</button>
+                </form>
+            </div>
+
+            <p class="auth-switch">
+                Don't have an account?
+                <a th:href="@{/register}">Create one free</a>
+            </p>
+
+        </div>
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+
+</body>
+</html>

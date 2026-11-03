@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head('Create account — Spendly')}">
+    <title>Create account</title>
+</head>
+
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="main-content">
+
+    <section class="auth-section">
+        <div class="auth-container">
+
+            <div class="auth-header">
+                <h1 class="auth-title">Create your account</h1>
+                <p class="auth-subtitle">Start tracking your expenses today</p>
+            </div>
+
+            <div class="auth-card">
+                <div class="auth-error" th:if="${error}" th:text="${error}"></div>
+
+                <!--/* Step 2: back this form with a RegisterForm record and
+                       @Valid so Bean Validation reports the errors instead of
+                       hand-written if-checks. */-->
+                <form th:action="@{/register}" method="post">
+                    <div class="form-group">
+                        <label for="name">Full name</label>
+                        <input type="text" id="name" name="name"
+                               class="form-input" placeholder="Nitish Kumar"
+                               required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email"
+                               class="form-input" placeholder="nitish@example.com"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password"
+                               class="form-input" placeholder="Min. 8 characters"
+                               required>
+                    </div>
+                    <button type="submit" class="btn-submit">Create account</button>
+                </form>
+            </div>
+
+            <p class="auth-switch">
+                Already have an account?
+                <a th:href="@{/login}">Sign in</a>
+            </p>
+
+        </div>
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+
+</body>
+</html>
