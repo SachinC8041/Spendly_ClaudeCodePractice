@@ -39,6 +39,9 @@ directly and return Thymeleaf view names. All packages live under `com.example.s
   everything else authenticated), the delegating `PasswordEncoder`, and a lambda
   `UserDetailsService` that adapts `User` → Spring Security's `User` with a single `USER`
   authority. Login uses **`email` as the username parameter**, not `username`.
+- `config/DataSeeder.java` — a `CommandLineRunner` that seeds the demo account
+  (`demo@spendly.com` / `demo123`) and 8 sample expenses on every startup, guarded by a
+  `findByEmail` check so restarts add nothing. Not profile-gated, so it runs in tests too.
 - `controller/UserController.java` — landing/login/register/terms/privacy pages plus the
   registration POST (duplicate-email check, encode, save, redirect to `/login`).
 - `controller/ExpenseController.java` — everything under `/expenses`. Resolves the current
