@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
@@ -34,4 +36,8 @@ public class Expenses
 
     @Column(length = 255)
     private String description;
+
+    @Column(nullable = false, updatable = false)
+    @ColumnDefault("CURRENT_TIMESTAMP(6)")
+    private Instant createdAt = Instant.now();
 }
